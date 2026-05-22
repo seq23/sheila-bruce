@@ -3,7 +3,46 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { readJsonDir, isPublished } from '../lib/content';
 import { videoSchema } from '../lib/schema';
 const albums=readJsonDir('src/content/gallery').filter(isPublished);
-const videos=albums.flatMap(a=>a.media.filter(m=>m.type==='video'&&m.published!==false));
+const generalAlbum=albums.find(a=>a.slug==='fabulous-moments');
+const eventAlbums=albums.filter(a=>a.eventSlug);
+const flyerItems=albums.flatMap(a=>a.media.filter(m=>m.published!==false && String(m.src).includes('/flyers/')).map(m=>({...m, albumTitle:a.title, albumSlug:a.slug, albumDescription:a.description})));
+const videos=albums.flatMap(a=>a.media.filter(m=>m.type==='video'&&m.published!==false).map(m=>({...m, albumTitle:a.title, albumSlug:a.slug})));
+const generalPhotos=(generalAlbum?.media||[]).filter(m=>m.published!==false && m.type!=='video');
 const mediaClass = (m) => `album-card ${m.type==='video'?'video-card':''} ${String(m.src).includes('/flyers/')?'flyer':''}`;
 ---
-<BaseLayout title="Gallery Albums | A Sheila Bruce Affair" schema={videos.map(videoSchema)}><section class="hero"><div><p class="eyebrow">A look back</p><h1>Gallery</h1><p class="lead">A curated memory wall of past affairs, photos, flyers, and video moments.</p></div><div class="hero-card"><img src="/assets/brand/sheila/sheila-champagne-closeup.jpeg" alt="Champagne moment"></div></section><section><div class="section-title"><h2>Featured albums</h2><p class="lead">Photos, videos, and flyer archives are framed according to their format so nothing important gets chopped off.</p></div><div class="album-grid">{albums.map(a=><a class={`album-card ${String(a.coverImage).includes('/flyers/')?'flyer':''}`} href={`#${a.slug}`}><img src={a.coverImage} alt={a.title}><div class="overlay"><span class="pill">{a.series}</span><h3>{a.title}</h3><p>{a.description}</p></div></a>)}</div></section>{albums.map(a=><section id={a.slug} class="dark"><div class="section-title"><h2>{a.title}</h2><p>{a.description}</p></div><div class="album-grid">{a.media.filter(m=>m.published!==false).map(m=><article class={mediaClass(m)}>{m.type==='video'?<video controls playsinline preload="metadata" poster={m.poster}><source src={m.src} type="video/mp4" /></video>:<img src={m.src} alt={m.alt||m.caption}/>}<div class="overlay"><h3>{m.caption||a.title}</h3></div></article>)}</div></section>)}</BaseLayout>
+<BaseLayout title="Gallery Albums | A Sheila Bruce Affair" schema={videos.map(videoSchema)}>
+  <section class="hero">
+    <div><p class="eyebrow">A look back</p><h1>Gallery</h1><p class="lead">A clear home for favorite photos, event albums, flyer archives, and video moments from A Sheila Bruce Affair.</p></div>
+    <div class="hero-card"><img src="/assets/brand/sheila/sheila-champagne-closeup.jpeg" alt="Champagne moment"></div>
+  </section>
+
+  <section id="moments-photos">
+    <div class="section-title"><div><p class="eyebrow">Moments & Photos</p><h2>Favorite snapshots</h2></div><p class="lead">A catch-all collection for portraits, community snapshots, and beautiful moments that do not need their own event album yet.</p></div>
+    <div class="album-grid gallery-grid--mixed">
+      {generalPhotos.map(m=><article class={mediaClass(m)}>{m.type==='video'?<video controls playsinline preload="metadata" poster={m.poster}><source src={m.src} type="video/mp4" /></video>:<img src={m.src} alt={m.alt||m.caption}/>}<div class="overlay"><span class="pill">Photo</span><h3>{m.caption||generalAlbum?.title}</h3></div></article>)}
+    </div>
+  </section>
+
+  <section id="event-albums" class="dark">
+    <div class="section-title"><div><p class="eyebrow">Event Albums</p><h2>Browse by affair</h2></div><p class="lead">Each album groups photos, video, or archive material tied to a specific affair.</p></div>
+    <div class="album-grid event-album-grid">
+      {eventAlbums.map(a=><a class={`album-card album-card--event ${String(a.coverImage).includes('/flyers/')?'flyer':''}`} href={`#album-${a.slug}`}><img src={a.coverImage} alt={a.title}><div class="overlay"><span class="pill">Event Album</span><h3>{a.title}</h3><p>{a.description||'Photos and archive material for this affair.'}</p></div></a>)}
+    </div>
+  </section>
+
+  <section id="flyer-archive">
+    <div class="section-title"><div><p class="eyebrow">Flyer Archive</p><h2>Past affair flyers</h2></div><p class="lead">Flyers are shown full-frame so the artwork and event details stay readable.</p></div>
+    <div class="album-grid flyer-archive-grid">
+      {flyerItems.map(m=><article class="album-card flyer"><img src={m.src} alt={m.alt||m.caption||m.albumTitle}/><div class="overlay"><span class="pill">Flyer</span><h3>{m.albumTitle}</h3><p>{m.caption||m.albumDescription}</p></div></article>)}
+    </div>
+  </section>
+
+  <section id="video-moments" class="dark">
+    <div class="section-title"><div><p class="eyebrow">Video Moments</p><h2>Video Moments</h2></div><p class="lead">A glimpse inside the affair, with short video moments, portrait-safe framing, and visible controls.</p></div>
+    <div class="album-grid video-moments-grid">
+      {videos.map(m=><article class="album-card video-card"><video controls playsinline preload="metadata" poster={m.poster}><source src={m.src} type="video/mp4" /></video><div class="overlay"><span class="pill">Video</span><h3>{m.caption||m.albumTitle}</h3></div></article>)}
+    </div>
+  </section>
+
+  {eventAlbums.map(a=><section id={`album-${a.slug}`}><div class="section-title"><div><p class="eyebrow">Album</p><h2>{a.title}</h2></div><p class="lead">{a.description}</p></div><div class="album-grid">{a.media.filter(m=>m.published!==false).map(m=><article class={mediaClass(m)}>{m.type==='video'?<video controls playsinline preload="metadata" poster={m.poster}><source src={m.src} type="video/mp4" /></video>:<img src={m.src} alt={m.alt||m.caption}/>}<div class="overlay"><h3>{m.caption||a.title}</h3></div></article>)}</div></section>)}
+</BaseLayout>

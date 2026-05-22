@@ -3,4 +3,54 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import site from '../data/site.json';
 import { socials } from '../data/social';
 ---
-<BaseLayout title="Contact | A Sheila Bruce Affair"><section class="hero"><div><p class="eyebrow">Let’s plan something fabulous</p><h1>Contact Sheila</h1><p class="lead">Ask about future events, guest list updates, or having Sheila host an affair for your group.</p></div><div class="hero-card"><img src="/assets/brand/sheila/sheila-glasses-portrait.png" alt="Sheila Bruce smiling"></div></section><section><div class="grid two"><div class="card"><h2>Contact Us</h2><p>For questions about future events, past affairs, tickets, payment, or general messages.</p><a class="btn" href={`mailto:${site.email}`}>Send a Message</a></div><div class="card"><h2>Have Sheila Host an Event</h2><p>For private gatherings, dinners, cocktail moments, boat parties, birthdays, professional circles, and community affairs.</p><a class="btn" href={`mailto:${site.email}?subject=Private event inquiry`}>Inquire About an Event</a></div></div></section><section class="dark"><h2>Inquiry form</h2><form class="form" data-contact-form><select name="intent"><option value="general_contact">Contact Us</option><option value="host_event_inquiry">Have Sheila Host an Event</option></select><input name="name" placeholder="Name" required><input name="email" type="email" placeholder="Email" required><input name="phone" placeholder="Phone optional"><textarea name="message" placeholder="Tell Sheila what you have in mind" required></textarea><button class="btn" type="submit">Send Inquiry</button><p class="small-note">If email relay is not configured yet, use {site.email} or text {site.phone}.</p></form><div class="btns">{socials.map(s=><a class="btn secondary" href={s.url} target="_blank">{s.label}</a>)}</div></section></BaseLayout>
+<BaseLayout title="Contact | A Sheila Bruce Affair">
+  <section class="hero contact-hero">
+    <div>
+      <p class="eyebrow">Let’s plan something fabulous</p>
+      <h1>Contact Sheila</h1>
+      <p class="lead">Ask about future events, guest list updates, or having Sheila host an affair for your group.</p>
+    </div>
+    <div class="hero-card contain-media"><img src="/assets/brand/sheila/sheila-glasses-portrait.png" alt="Sheila Bruce smiling"></div>
+  </section>
+
+  <section>
+    <div class="section-title">
+      <h2>How would you like to connect?</h2>
+      <p class="lead">Choose the lane that fits what you need. Both options open a ready-to-send email.</p>
+    </div>
+    <div class="grid two contact-options">
+      <div class="card contact-card">
+        <span class="pill">General contact</span>
+        <h2>Contact Us</h2>
+        <p>For questions about future events, past affairs, tickets, payment, guest list updates, or general messages.</p>
+        <a class="btn" href={`mailto:${site.email}?subject=General%20question%20for%20A%20Sheila%20Bruce%20Affair`}>Send a Message</a>
+      </div>
+      <div class="card contact-card featured-contact-card">
+        <span class="pill">Private affair</span>
+        <h2>Have Sheila Host an Event</h2>
+        <p>For private gatherings, dinners, cocktail moments, boat parties, birthdays, professional circles, and community affairs.</p>
+        <a class="btn" href={`mailto:${site.email}?subject=Private%20event%20inquiry%20for%20A%20Sheila%20Bruce%20Affair`}>Inquire About an Event</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark contact-direct">
+    <div class="section-title">
+      <h2>Direct details</h2>
+      <p class="lead">Email, text, or follow along for future fabulous affairs.</p>
+    </div>
+    <div class="grid two">
+      <div class="card">
+        <h3>Email</h3>
+        <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      </div>
+      <div class="card">
+        <h3>Text / RSVP</h3>
+        <p><a href={`tel:${site.phone}`}>{site.phone}</a></p>
+      </div>
+    </div>
+    <div class="btns social-contact-links">
+      {socials.map(s=><a class="btn secondary" href={s.url} target="_blank">{s.label}</a>)}
+    </div>
+  </section>
+</BaseLayout>

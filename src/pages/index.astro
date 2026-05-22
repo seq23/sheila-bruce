@@ -24,8 +24,28 @@ const featuredAlbum=albums.find(a=>a.slug===feature.featuredAlbumSlug)||albums[0
     <div class="section-title"><h2>Where community & luxury meet.</h2><p class="lead">Sophisticated social gatherings, wellness conversations, empowerment experiences, and unforgettable celebrations.</p></div>
     <div class="grid"><div class="card"><span class="pill">Signature</span><h3>Social Events</h3><p>Boat rides, white parties, formal evenings, and stylish seasonal soirées.</p></div><div class="card"><span class="pill">Wellness</span><h3>Women Supporting Women</h3><p>Open conversations rooted in health, sisterhood, community, and joy.</p></div><div class="card"><span class="pill">Empowerment</span><h3>Wealth & Confidence</h3><p>Elegant rooms where accomplished women connect around leadership and elevated living.</p></div></div>
   </section>
-  <section class="dark"><div class="section-title"><h2>Featured Affair</h2><a class="btn" href="/events">See the Archive</a></div>{featured && <article class="event-row"><img src={featured.featuredImage} alt={featured.title}><div><span class="pill">{featured.category}</span><h3>{featured.title}</h3><p>{featured.summary}</p></div><a class="btn" href={`/events/${featured.slug}`}>View Past Affair</a></article>}<div data-local-events></div></section>
+  <section class="dark featured-affair-section">
+    <div class="section-title">
+      <div>
+        <p class="eyebrow">Featured Affair</p>
+        <h2>Spotlight from the archive</h2>
+      </div>
+      <a class="btn" href="/events">See the Archive</a>
+    </div>
+    {featured && <article class="featured-affair-card">
+      <div class="featured-affair-card__media"><img src={featured.featuredImage} alt={featured.title}></div>
+      <div class="featured-affair-card__copy">
+        <span class="badge">Featured Past Affair</span>
+        <span class="pill event-category-pill">{featured.category}</span>
+        <h3>{featured.title}</h3>
+        <p class="featured-affair-card__summary">{featured.summary}</p>
+        <p class="event-card__meta">{featured.displayDate} · {featured.location}</p>
+        <a class="btn" href={`/events/${featured.slug}`}>View Past Affair</a>
+      </div>
+    </article>}
+    <div data-local-events></div>
+  </section>
   <section><div class="section-title"><h2>Upcoming affairs</h2></div>{upcoming.length===0 ? <div class="empty"><h3>New fabulous affairs are being planned.</h3><p>Check back soon, or contact Sheila to be added to the list.</p><div class="btns"><a class="btn" href="/contact">Contact Sheila</a><a class="btn secondary" href="/events">View Past Affairs</a></div></div> : upcoming.map(ev=><article class="event-row"><img src={ev.featuredImage} alt={ev.title}><div><span class="pill">Upcoming</span><h3>{ev.title}</h3><p>{ev.summary}</p></div><a class="btn" href={`/events/${ev.slug}`}>{ev.registrationType==='external'?'Register Now':'Ask About This Event'}</a></article>)}</section>
   <section class="dark"><div class="section-title"><h2>A glimpse inside the affair.</h2><p class="lead">Photos, flyers, and video moments from fabulous gatherings.</p></div>{featuredAlbum && <div class="album-grid">{featuredAlbum.media.filter(m=>m.published!==false).slice(0,3).map(m=><article class={`album-card ${m.type==='video'?'video-card':''} ${String(m.src).includes('/flyers/')?'flyer':''}`}>{m.type==='video'?<video controls playsinline preload="metadata" poster={m.poster}><source src={m.src} type="video/mp4" /></video>:<img src={m.src} alt={m.alt||m.caption}/>}<div class="overlay"><span class="pill">{m.type}</span><h3>{m.caption||featuredAlbum.title}</h3></div></article>)}</div>}</section>
-  <section><div class="split"><div><p class="script">Meet Sheila</p><h2>The woman behind the affairs.</h2><p class="lead">The founder and host behind A Sheila Bruce Affair, Sheila brings warmth, elegance, and a gift for gathering people beautifully.</p><a class="btn" href="/sheila">Read Sheila’s Story</a></div><div class="portrait"><img src="/assets/brand/sheila/sheila-blue-hat-about.png" alt="Sheila Bruce smiling in a blue hat"></div></div></section>
+  <section><div class="split"><div><p class="script">Meet Sheila</p><h2>The woman behind the affairs.</h2><p class="lead">The founder and host behind A Sheila Bruce Affair, Sheila brings warmth, elegance, and a gift for gathering people beautifully.</p><a class="btn" href="/sheila">Read Sheila’s Story</a></div><div class="portrait portrait-contain portrait-contain--blue-hat"><img src="/assets/brand/sheila/sheila-blue-hat-about.png" alt="Sheila Bruce smiling in a blue hat"></div></div></section>
 </BaseLayout>

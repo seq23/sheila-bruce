@@ -1,60 +1,47 @@
-# Hostile Review — Design Hardening Patch 01
+# Hostile Review — Design Hardening Patch 03
 
 ## Scope
-Design hardening, content architecture cleanup, media presentation fixes, nav cleanup, footer/header/logo improvements, mobile styling, package-lock registry fix, Playwright local browser config fix.
 
-## Loop Count
-2
+This pass repairs the visual and UX failures identified from local screenshots:
 
-## Issues Found
-- Header logo was technically present but not visually prominent enough.
-- Logo needed to be a reliable homepage hyperlink.
-- Main navigation was too crowded and included Sarasota as a standalone top-nav item despite About absorbing Gulf Coast positioning.
-- Homepage hero typography was too oversized and visually domineering.
-- Animated hero phrase lacked script/depth treatment.
-- Images, flyers, and videos were using overly generic crop rules.
-- Flyers and video thumbnails could be cropped in gallery/event contexts.
-- Footer was too thin and did not behave like a real brand footer.
-- Homepage Meet Sheila and About/Sheila copy overlapped too much.
-- About needed to be about the company/events, not a duplicate founder bio.
-- Sheila page needed to hold the actual founder story.
-- Local package-lock used internal sandbox registry URLs.
-- Playwright config hardcoded `/usr/bin/chromium`, which fails on macOS.
+- redundant contact inquiry form
+- blue hat image cropping Sheila's face
+- invisible event titles/descriptions caused by white text on light cards
+- Past Affairs thumbnails too small
+- Featured Affair section not visually reading as featured
+- Gallery mental model confusing without a catch-all photo area
+- Admin homepage feature field requiring slug/id knowledge
 
-## Fixes Applied
-- Added a more visible logo lockup in the header and footer; both link to `/`.
-- Removed Sarasota from top navigation while keeping `/sarasota/` available as a hidden/local page.
-- Reduced hero typography scale and added script styling for rotating hero phrase.
-- Refined homepage hero image framing and visual hierarchy.
-- Added media treatment classes for flyers, portrait photos, video cards, and contain-media contexts.
-- Reworked gallery rendering so flyers/videos receive safer non-cropping treatment.
-- Reworked event detail hero image handling so flyers are contained instead of cropped.
-- Rebuilt footer with logo, brand descriptor, contact details, social links, quick links, legal, and signature phrase.
-- Rewrote About page around company, event types, audience, Gulf Coast positioning, and Sisters of Sarasota bridge.
-- Focused Sheila page on founder biography and hosting philosophy.
-- Added review convenience scripts.
-- Patched package-lock registry URLs to public npm.
-- Patched Playwright config to use installed Playwright Chromium unless a custom executable is supplied.
-- Updated Master Gauntlet locators and checks to reflect the design/nav changes.
+## Hostile Loop
 
-## Remaining Known Risks
-- Final visual taste must be approved by the user in browser preview.
-- Live Cloudflare/GitHub admin publishing remains unproven until deployment/env setup.
-- The hidden Sarasota page still exists but is no longer top-nav; it can be removed later if desired.
+Loop count: 2
 
-## Exit Condition
-No known fixable source-level design hardening issue remains for this patch before local visual preview. Build/validators/gauntlet must still be run after update.
+### Issues found
 
-## Design Hardening Patch 02 — Image Role Correction
+1. Contact page repeated the same action twice: mailto CTA cards plus a full inquiry form.
+2. Blue hat image used cover-style portrait framing that cut off Sheila's face.
+3. Event archive cards had insufficient hierarchy: small flyers, category pill competing with invisible title/description copy.
+4. Featured Affair read like a normal archive row instead of a true spotlight.
+5. Gallery mixed photos, flyers, videos, and event albums without a clear information architecture.
+6. Admin homepage feature selection exposed slug/id language to the client.
+7. Static validation did not enforce the specific UX contracts that failed visually.
 
-Locked image hierarchy applied:
-- Home hero uses `/assets/brand/sheila/sheila-black-dress-hero.jpg`.
-- Home Meet Sheila card uses `/assets/brand/sheila/sheila-blue-hat-about.png`.
-- About page hero uses `/assets/sarasota/sarasota-gulf-coast-yacht.jpg`.
-- Sheila page hero uses `/assets/brand/sheila/sheila-twirling-black-dress.jpg`.
-- Header/footer logo remains linked to `/`.
+### Fixes applied
 
-Validation expectations:
-- `validate-assets` now requires the new Sarasota and twirling black dress assets.
-- Master Gauntlet now asserts the locked image-role hierarchy on Home, About, and Sheila pages.
+1. Removed the contact form and kept two clear mailto CTAs.
+2. Added blue-hat contain framing so the full image is visible.
+3. Rebuilt Past Affairs cards with larger flyer previews, visible category pills, dark event titles, and readable descriptions.
+4. Rebuilt Featured Affair as a title-forward feature card with larger flyer artwork and prominent text.
+5. Rebuilt Gallery around four clear sections: Moments & Photos, Event Albums, Flyer Archive, Video Moments.
+6. Replaced the admin slug/id field with a readable dropdown of events, albums, and videos.
+7. Updated validators and Master Gauntlet tests to catch these regressions.
 
+### Remaining known risks
+
+- Human visual approval is still required in local preview.
+- Container Playwright remains blocked by this environment's browser/network policy, despite build and static validation passing.
+- Deployed Cloudflare proof is not run until the repo is pushed/deployed.
+
+## Exit condition
+
+No known fixable source-level issue remains for Patch 03 before local visual review.
