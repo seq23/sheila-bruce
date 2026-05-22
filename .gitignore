@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.local
+.env.production
+playwright-report/
+test-results/
+.DS_Store

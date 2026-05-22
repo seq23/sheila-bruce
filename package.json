@@ -1,0 +1,37 @@
+{
+  "name": "sheila-bruce",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "validate": "npm run validate:content && npm run validate:routes && npm run validate:links && npm run validate:events && npm run validate:published && npm run validate:admin && npm run validate:schema && npm run validate:media && npm run validate:secrets && npm run validate:assets && npm run validate:social",
+    "validate:all": "npm run build && npm run validate && npm run test:gauntlet",
+    "validate:content": "node scripts/validate-content.mjs",
+    "validate:routes": "node scripts/validate-routes.mjs",
+    "validate:links": "node scripts/validate-links.mjs",
+    "validate:events": "node scripts/validate-events.mjs",
+    "validate:published": "node scripts/validate-published.mjs",
+    "validate:admin": "node scripts/validate-admin-contract.mjs",
+    "validate:schema": "node scripts/validate-schema.mjs",
+    "validate:media": "node scripts/validate-media.mjs",
+    "validate:secrets": "node scripts/validate-no-secrets.mjs",
+    "validate:assets": "node scripts/validate-assets.mjs",
+    "validate:social": "node scripts/validate-social.mjs",
+    "test:e2e": "playwright test",
+    "test:gauntlet": "playwright test tests/e2e/master-gauntlet.spec.ts",
+    "review": "astro dev",
+    "review:built": "npm run build && astro preview",
+    "test:gauntlet:headed": "playwright test tests/e2e/master-gauntlet.spec.ts --headed",
+    "test:ui": "playwright test --ui"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.6.0",
+    "astro": "^6.3.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0"
+  }
+}

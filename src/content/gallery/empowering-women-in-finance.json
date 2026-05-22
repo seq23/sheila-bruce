@@ -1,0 +1,22 @@
+{
+  "title": "Empowering Women in Finance",
+  "slug": "empowering-women-in-finance",
+  "published": true,
+  "featuredOnHome": false,
+  "eventSlug": "empowering-women-in-finance",
+  "series": "Women’s Empowerment",
+  "description": "An evening of financial confidence, leadership, and meaningful connection.",
+  "coverImage": "/assets/flyers/empowering-women-in-finance.png",
+  "media": [
+    {
+      "id": "finance-flyer",
+      "type": "image",
+      "src": "/assets/flyers/empowering-women-in-finance.png",
+      "poster": "",
+      "alt": "Empowering Women in Finance flyer",
+      "caption": "An intimate educational evening for accomplished women.",
+      "published": true,
+      "sortOrder": 1
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "published": true,
+  "status": "past",
+  "featuredOnHome": false,
+  "registrationType": "none",
+  "registrationUrl": "",
+  "registrationLabel": "Register Now",
+  "registrationNote": "",
+  "registrationClosesAt": "",
+  "speakers": [],
+  "panelists": [
+    "Yusif Addae, M.D.",
+    "Angela Boldo, M.D.",
+    "Vida Farhangi, M.D.",
+    "Sarah Kimball, M.D."
+  ],
+  "schedule": [
+    {
+      "time": "9:00 a.m.",
+      "label": "Arrival and Light Breakfast"
+    },
+    {
+      "time": "9:30 a.m.",
+      "label": "Panel Introductions and Presentation"
+    },
+    {
+      "time": "10:30 a.m.",
+      "label": "Q&A"
+    }
+  ],
+  "isFree": true,
+  "isInvitationOnly": false,
+  "title": "Women’s Health in Midlife and Beyond",
+  "slug": "womens-health-midlife-beyond",
+  "date": "2025-10-15",
+  "displayDate": "Wednesday, October 15",
+  "startTime": "9:00 AM",
+  "endTime": "11:00 AM",
+  "venueName": "Morganroth Family Auditorium",
+  "address": "Kolschowsky Research and Education Institute at SMH, 1880 Arlington St., Sarasota",
+  "location": "1880 Arlington St., Sarasota",
+  "category": "Wellness Conversation",
+  "series": "Black Women in Midlife & Beyond",
+  "audience": "Women of color and community members interested in midlife wellness.",
+  "summary": "An open conversation for women of color on menopause, hormones, breast cancer, osteoporosis, and midlife wellness.",
+  "description": "Presented by A Sheila Bruce Affair, this community panel focused on the unique health issues women of color face regarding menopause, hormones, breast cancer, and osteoporosis. The event included healthcare panelists, light breakfast, presentations, and Q&A.",
+  "attire": "Community conversation",
+  "price": "Free",
+  "ticketInfo": "Free and open to the public.",
+  "contactEmail": "asheilabruceaffair@gmail.com",
+  "featuredImage": "/assets/flyers/womens-health-midlife-beyond.jpg",
+  "galleryAlbumSlug": "womens-health-midlife-beyond",
+  "partnerName": "Sarasota Memorial Healthcare Foundation"
+}

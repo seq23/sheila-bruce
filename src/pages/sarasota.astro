@@ -1,0 +1,6 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { sarasotaImages } from '../data/sarasota';
+const hero=sarasotaImages[0];
+---
+<BaseLayout title="Things to Do in Sarasota, Florida | A Sheila Bruce Affair"><section class="hero"><div><p class="eyebrow">Sarasota, styled beautifully</p><h1>Elegant outings, culture & social moments.</h1><p class="lead">A Sheila Bruce Affair is rooted in Sarasota and Florida’s Gulf Coast — where coastal beauty, culture, dining, wellness, friendship, and celebration meet.</p></div><div class="hero-card"><img src={hero.src} alt={hero.alt}></div></section><section><div class="grid"><div class="card"><h3>Beach Days & Sunset Moments</h3><p>White sand, golden light, and easy Gulf Coast elegance.</p></div><div class="card"><h3>Arts, Theater & Culture</h3><p>Sarasota’s cultural scene gives gatherings a sophisticated local rhythm.</p></div><div class="card"><h3>Dining, Cocktails & Conversation</h3><p>From happy hour to private dinners, connection is the real luxury.</p></div></div></section><section class="dark"><div class="section-title"><h2>Sarasota mood board</h2></div><div class="album-grid">{sarasotaImages.map(img=><article class="album-card"><img src={img.src} alt={img.alt}><div class="overlay"><h3>{img.alt}</h3><p>{img.credit}</p></div></article>)}</div></section></BaseLayout>

@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { readJsonDir, isPublished } from '../lib/content';
+import { videoSchema } from '../lib/schema';
+const albums=readJsonDir('src/content/gallery').filter(isPublished);
+const videos=albums.flatMap(a=>a.media.filter(m=>m.type==='video'&&m.published!==false));
+const mediaClass = (m) => `album-card ${m.type==='video'?'video-card':''} ${String(m.src).includes('/flyers/')?'flyer':''}`;
+---
+<BaseLayout title="Gallery Albums | A Sheila Bruce Affair" schema={videos.map(videoSchema)}><section class="hero"><div><p class="eyebrow">A look back</p><h1>Gallery</h1><p class="lead">A curated memory wall of past affairs, photos, flyers, and video moments.</p></div><div class="hero-card"><img src="/assets/brand/sheila/sheila-champagne-closeup.jpeg" alt="Champagne moment"></div></section><section><div class="section-title"><h2>Featured albums</h2><p class="lead">Photos, videos, and flyer archives are framed according to their format so nothing important gets chopped off.</p></div><div class="album-grid">{albums.map(a=><a class={`album-card ${String(a.coverImage).includes('/flyers/')?'flyer':''}`} href={`#${a.slug}`}><img src={a.coverImage} alt={a.title}><div class="overlay"><span class="pill">{a.series}</span><h3>{a.title}</h3><p>{a.description}</p></div></a>)}</div></section>{albums.map(a=><section id={a.slug} class="dark"><div class="section-title"><h2>{a.title}</h2><p>{a.description}</p></div><div class="album-grid">{a.media.filter(m=>m.published!==false).map(m=><article class={mediaClass(m)}>{m.type==='video'?<video controls playsinline preload="metadata" poster={m.poster}><source src={m.src} type="video/mp4" /></video>:<img src={m.src} alt={m.alt||m.caption}/>}<div class="overlay"><h3>{m.caption||a.title}</h3></div></article>)}</div></section>)}</BaseLayout>

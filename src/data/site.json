@@ -1,0 +1,26 @@
+{
+  "brandName": "A Sheila Bruce Affair",
+  "legalName": "A Sheila Bruce Affair, LLC",
+  "descriptor": "A Sheila Bruce Affair is a luxury lifestyle and event brand based on Florida’s Gulf Coast, creating sophisticated social gatherings, wellness conversations, empowerment experiences, and unforgettable celebrations where Black women, friends, couples, professionals, and community leaders gather for culture, connection, joy, and elevated living.",
+  "email": "asheilabruceaffair@gmail.com",
+  "phone": "215-262-6942",
+  "location": "Sarasota, Florida and surrounding Gulf Coast communities",
+  "adminPassword": "blackgirlmagic",
+  "socials": [
+    {
+      "label": "Facebook",
+      "url": "https://www.facebook.com/fabulousgigi58",
+      "icon": "facebook"
+    },
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/fabulousgigi58/",
+      "icon": "instagram"
+    },
+    {
+      "label": "TikTok",
+      "url": "https://www.tiktok.com/@fabul11",
+      "icon": "tiktok"
+    }
+  ]
+}

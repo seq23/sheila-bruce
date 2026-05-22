@@ -1,0 +1,32 @@
+{
+  "title": "Denim & Diamonds Boat Ride Party",
+  "slug": "denim-diamonds-boat-ride-party",
+  "published": true,
+  "featuredOnHome": false,
+  "eventSlug": "denim-diamonds-boat-ride-party",
+  "series": "Sisters of Sarasota",
+  "description": "A sparkling boat ride party where denim met diamonds on Sarasota’s waters.",
+  "coverImage": "/assets/flyers/denim-diamonds-boat-ride.png",
+  "media": [
+    {
+      "id": "denim-flyer",
+      "type": "image",
+      "src": "/assets/flyers/denim-diamonds-boat-ride.png",
+      "poster": "",
+      "alt": "Denim and Diamonds Boat Ride Party flyer",
+      "caption": "A Denim & Diamonds themed boat ride party hosted by Sisters of Sarasota by the Sea.",
+      "published": true,
+      "sortOrder": 1
+    },
+    {
+      "id": "denim-note",
+      "type": "image",
+      "src": "/assets/flyers/denim-diamonds-champagne-note.png",
+      "poster": "",
+      "alt": "Denim and Diamonds champagne note",
+      "caption": "Guest note about onboard cocktails and optional Veuve Clicquot Champagne pre-order.",
+      "published": true,
+      "sortOrder": 2
+    }
+  ]
+}

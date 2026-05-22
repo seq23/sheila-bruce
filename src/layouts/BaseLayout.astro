@@ -1,0 +1,69 @@
+---
+import site from '../data/site.json';
+import { socials } from '../data/social';
+import { organizationSchema } from '../lib/schema';
+const { title = site.brandName, description = site.descriptor, schema = [] } = Astro.props;
+const allSchema = [organizationSchema(), ...(Array.isArray(schema)?schema:[schema])];
+const nav = [
+  { label: 'Events', href: '/events' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Inspiration', href: '/inspiration' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' }
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <link rel="icon" href="/assets/logos/sheila-logo.png">
+    <script type="application/ld+json" set:html={JSON.stringify(allSchema)}></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/styles/global.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="A Sheila Bruce Affair home">
+        <span class="brand-mark"><img src="/assets/logos/sheila-logo.png" alt="A Sheila Bruce Affair logo"></span>
+        <span class="brand-text">A Sheila Bruce Affair</span>
+      </a>
+      <nav aria-label="Main navigation">
+        {nav.map(item => <a href={item.href}>{item.label}</a>)}
+      </nav>
+    </header>
+    <main><slot /></main>
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="footer-logo" href="/" aria-label="A Sheila Bruce Affair home">
+            <img src="/assets/logos/sheila-logo.png" alt="A Sheila Bruce Affair logo">
+            <span>A Sheila Bruce Affair</span>
+          </a>
+          <p>{site.descriptor}</p>
+          <p class="footer-script">Fabulous affairs. Beautiful friendships. Women supporting women.</p>
+        </div>
+        <div>
+          <h3>Explore</h3>
+          <ul>
+            {nav.map(item => <li><a href={item.href}>{item.label}</a></li>)}
+            <li><a href="/sheila">Meet Sheila</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <p>{site.location}</p>
+          <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+          <p><a href={`tel:${site.phone}`}>{site.phone}</a></p>
+          <div class="socials" aria-label="Social links">{socials.map(s=><a href={s.url} target="_blank" rel="noopener">{s.label}</a>)}</div>
+        </div>
+      </div>
+      <p class="legal">© 2026 A Sheila Bruce Affair, LLC. All rights reserved.</p>
+    </footer>
+    <script src="/src/scripts/site.js" type="module"></script>
+  </body>
+</html>

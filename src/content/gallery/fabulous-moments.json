@@ -1,0 +1,52 @@
+{
+  "title": "Fabulous Moments",
+  "slug": "fabulous-moments",
+  "published": true,
+  "featuredOnHome": true,
+  "eventSlug": "",
+  "series": "A Sheila Bruce Affair Signature Events",
+  "description": "Selected video and photo moments from the world of A Sheila Bruce Affair.",
+  "coverImage": "/assets/brand/sheila/sheila-champagne-closeup.jpeg",
+  "media": [
+    {
+      "id": "video-1",
+      "type": "video",
+      "src": "/assets/videos/fabulous-moment-01.mp4",
+      "poster": "/assets/videos/fabulous-moment-01-poster.jpg",
+      "alt": "Video moment from A Sheila Bruce Affair",
+      "caption": "A glimpse inside the affair.",
+      "published": true,
+      "sortOrder": 1
+    },
+    {
+      "id": "video-2",
+      "type": "video",
+      "src": "/assets/videos/fabulous-moment-02.mp4",
+      "poster": "/assets/videos/fabulous-moment-02-poster.jpg",
+      "alt": "Video moment from A Sheila Bruce Affair",
+      "caption": "Fabulous company and beautiful moments.",
+      "published": true,
+      "sortOrder": 2
+    },
+    {
+      "id": "video-3",
+      "type": "video",
+      "src": "/assets/videos/affair-montage.mp4",
+      "poster": "/assets/videos/affair-montage-poster.jpg",
+      "alt": "A Sheila Bruce Affair montage",
+      "caption": "An elegant look inside the celebration.",
+      "published": true,
+      "sortOrder": 3
+    },
+    {
+      "id": "black-dress-alt",
+      "type": "image",
+      "src": "/assets/brand/sheila/sheila-black-dress-alt.jpg",
+      "poster": "",
+      "alt": "Sheila Bruce in an elegant black dress",
+      "caption": "Founder elegance and style.",
+      "published": true,
+      "sortOrder": 4
+    }
+  ]
+}

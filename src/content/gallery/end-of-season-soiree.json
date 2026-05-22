@@ -1,0 +1,22 @@
+{
+  "title": "End of Season Soirée",
+  "slug": "end-of-season-soiree",
+  "published": true,
+  "featuredOnHome": false,
+  "eventSlug": "end-of-season-soiree",
+  "series": "A Sheila Bruce Affair Socials",
+  "description": "A warm end-of-season gathering before summer.",
+  "coverImage": "/assets/flyers/end-of-season-soiree.png",
+  "media": [
+    {
+      "id": "soiree-flyer",
+      "type": "image",
+      "src": "/assets/flyers/end-of-season-soiree.png",
+      "poster": "",
+      "alt": "End of Season Soirée flyer",
+      "caption": "A happy hour gathering before the summer season.",
+      "published": true,
+      "sortOrder": 1
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { readMarkdownDir, isPublished } from '../../lib/content';
+const posts=readMarkdownDir('src/content/insights').filter(isPublished);
+---
+<BaseLayout title="Inspiration & Ideas | A Sheila Bruce Affair"><section class="hero"><div><p class="eyebrow">Inspiration</p><h1>Ideas for stylish connection.</h1><p class="lead">Sarasota style, wellness, wealth, hosting notes, and beautiful reasons to gather.</p></div><div class="hero-card"><img src="/assets/brand/sheila/sheila-champagne-closeup.jpeg" alt="Champagne toast"></div></section><section><div class="grid">{posts.map(p=><article class="card"><span class="pill">{p.category}</span><h3>{p.title}</h3><p>{p.summary}</p><a class="btn secondary" href={`/inspiration/${p.slug}`}>Read</a></article>)}</div></section></BaseLayout>

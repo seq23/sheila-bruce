@@ -1,0 +1,22 @@
+{
+  "title": "Marvin Woods Virtual Cooking Class",
+  "slug": "marvin-woods-virtual-cooking-class",
+  "published": true,
+  "featuredOnHome": false,
+  "eventSlug": "marvin-woods-virtual-cooking-class",
+  "series": "A Sheila Bruce Affair Socials",
+  "description": "Virtual culinary evening with Marvin Woods.",
+  "coverImage": "/assets/flyers/marvin-woods-cooking-class.png",
+  "media": [
+    {
+      "id": "marvin-flyer",
+      "type": "image",
+      "src": "/assets/flyers/marvin-woods-cooking-class.png",
+      "poster": "",
+      "alt": "Marvin Woods Virtual Cooking Class flyer",
+      "caption": "A culinary and cocktail experience with Marvin Woods.",
+      "published": true,
+      "sortOrder": 1
+    }
+  ]
+}

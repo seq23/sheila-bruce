@@ -1,0 +1,42 @@
+{
+  "title": "Tuxedo Ball",
+  "slug": "tuxedo-ball",
+  "published": true,
+  "featuredOnHome": true,
+  "eventSlug": "tuxedo-ball",
+  "series": "Tuxedo Ball",
+  "description": "Black Hollywood glamour, champagne, music, dinner, and celebration.",
+  "coverImage": "/assets/flyers/tuxedo-ball.png",
+  "media": [
+    {
+      "id": "tuxedo-flyer",
+      "type": "image",
+      "src": "/assets/flyers/tuxedo-ball.png",
+      "poster": "",
+      "alt": "Tuxedo Ball flyer",
+      "caption": "An evening of Black Hollywood glamour and timeless sophistication.",
+      "published": true,
+      "sortOrder": 1
+    },
+    {
+      "id": "sheila-champagne",
+      "type": "image",
+      "src": "/assets/brand/sheila/sheila-champagne-closeup.jpeg",
+      "poster": "",
+      "alt": "Sheila Bruce smiling with champagne",
+      "caption": "A fabulous champagne moment.",
+      "published": true,
+      "sortOrder": 2
+    },
+    {
+      "id": "nye-video",
+      "type": "video",
+      "src": "/assets/videos/nye-2026.mp4",
+      "poster": "/assets/videos/nye-2026-poster.jpg",
+      "alt": "Tuxedo Ball video moment",
+      "caption": "A video moment from a formal celebration.",
+      "published": true,
+      "sortOrder": 3
+    }
+  ]
+}

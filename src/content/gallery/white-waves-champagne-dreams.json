@@ -1,0 +1,32 @@
+{
+  "title": "White Waves & Champagne Dreams",
+  "slug": "white-waves-champagne-dreams",
+  "published": true,
+  "featuredOnHome": false,
+  "eventSlug": "white-waves-champagne-dreams",
+  "series": "A Sheila Bruce Affair Signature Events",
+  "description": "White attire, champagne, lunch, music, and Sarasota waters.",
+  "coverImage": "/assets/flyers/white-waves-champagne-dreams.png",
+  "media": [
+    {
+      "id": "white-waves-flyer",
+      "type": "image",
+      "src": "/assets/flyers/white-waves-champagne-dreams.png",
+      "poster": "",
+      "alt": "White Waves and Champagne Dreams flyer",
+      "caption": "A white-attire champagne boat affair at Marina Jacks.",
+      "published": true,
+      "sortOrder": 1
+    },
+    {
+      "id": "sheila-boat-white",
+      "type": "image",
+      "src": "/assets/brand/sheila/sheila-boat-white.jpg",
+      "poster": "",
+      "alt": "Sheila Bruce aboard a boat in white attire",
+      "caption": "Sheila Bruce aboard a Sarasota boat affair.",
+      "published": true,
+      "sortOrder": 2
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Women’s Health in Midlife and Beyond",
+  "slug": "womens-health-midlife-beyond",
+  "published": true,
+  "featuredOnHome": false,
+  "eventSlug": "womens-health-midlife-beyond",
+  "series": "Black Women in Midlife & Beyond",
+  "description": "A wellness conversation for women of color about midlife health.",
+  "coverImage": "/assets/flyers/womens-health-midlife-beyond.jpg",
+  "media": [
+    {
+      "id": "health-flyer",
+      "type": "image",
+      "src": "/assets/flyers/womens-health-midlife-beyond.jpg",
+      "poster": "",
+      "alt": "Women’s Health in Midlife and Beyond flyer",
+      "caption": "An open conversation for women of color on midlife health and wellness.",
+      "published": true,
+      "sortOrder": 1
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Black Women in Midlife & Beyond Dinner",
+  "slug": "black-women-midlife-beyond-dinner-cocktails",
+  "published": true,
+  "featuredOnHome": false,
+  "eventSlug": "black-women-midlife-beyond-dinner-cocktails",
+  "series": "Black Women in Midlife & Beyond",
+  "description": "Dinner, cocktails, and sisterhood continuing an important wellness conversation.",
+  "coverImage": "/assets/flyers/black-women-midlife-beyond-dinner.png",
+  "media": [
+    {
+      "id": "midlife-dinner-flyer",
+      "type": "image",
+      "src": "/assets/flyers/black-women-midlife-beyond-dinner.png",
+      "poster": "",
+      "alt": "Black Women in Midlife and Beyond Dinner flyer",
+      "caption": "Sisterhood, community, and joy at a dinner and cocktail conversation.",
+      "published": true,
+      "sortOrder": 1
+    }
+  ]
+}
