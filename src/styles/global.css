@@ -202,3 +202,54 @@
     height: min(74vh,640px) !important;
   }
 }
+
+/* Let native video controls receive clicks/taps inside gallery cards. */
+.album-card.video-card:after,
+.album-card.video-card .overlay {
+  pointer-events: none;
+}
+
+.album-card.video-card video {
+  z-index: 1;
+}
+
+/* Video cards need their captions below the player so native controls stay usable. */
+.album-card.video-card {
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: auto;
+  min-height: 0;
+  background: linear-gradient(135deg,#211713,#3a251e);
+}
+
+.album-card.video-card:after {
+  display: none;
+}
+
+.album-card.video-card video,
+.album-card.video-card img {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 14;
+  max-height: 560px;
+  object-fit: contain;
+  background: linear-gradient(135deg,#211713,#3a251e);
+  padding: 12px;
+  z-index: 1;
+}
+
+.album-card.video-card .overlay {
+  position: relative;
+  bottom: auto;
+  z-index: 2;
+  padding: 18px 20px 22px;
+  background: rgba(19, 12, 9, 0.96);
+  pointer-events: auto;
+}
+
+.album-card.video-card .overlay h3 {
+  margin: 8px 0 0;
+}
+
