@@ -33,7 +33,7 @@ test('gallery gauntlet: gallery has clear hybrid V1 sections', async ({ page }) 
   await expect(page.getByRole('heading', { name: 'Favorite snapshots' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Browse by affair' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Past affair flyers' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Video Moments' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Watch Sheila & the Affair' })).toBeVisible();
   await expect(page.locator('video').first()).toBeVisible();
 });
 test('contact gauntlet: contact uses mailto plus guest-list capture', async ({ page }) => {

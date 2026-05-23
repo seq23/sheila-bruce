@@ -38,7 +38,7 @@ const mediaClass = (m) => `album-card ${m.type==='video'?'video-card':''} ${Stri
   </section>
 
   <section id="video-moments" class="dark">
-    <div class="section-title"><div><p class="eyebrow">Video Moments</p><h2>Video Moments</h2></div><p class="lead">A glimpse inside the affair, with short video moments, portrait-safe framing, and visible controls.</p></div>
+    <div class="section-title"><div><p class="eyebrow">Watch</p><h2>Watch Sheila &amp; the Affair</h2></div><p class="lead">Event moments, conversations, and behind-the-scenes glimpses from A Sheila Bruce Affair.</p></div>
     <div class="album-grid video-moments-grid">
       {videos.map(m=><article class="album-card video-card"><video controls playsinline preload="metadata" poster={m.poster}><source src={m.src} type="video/mp4" /></video><div class="overlay"><span class="pill">Video</span><h3>{m.caption||m.albumTitle}</h3></div></article>)}
     </div>
