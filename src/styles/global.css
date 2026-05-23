@@ -253,3 +253,19 @@
   margin: 8px 0 0;
 }
 
+/* About hero logo card: lighter field so the silhouette stays readable. */
+.logo-hero-card {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 250, 241, 0.98), rgba(234, 216, 179, 0.84) 58%, rgba(215, 181, 109, 0.28));
+  padding: clamp(28px, 5vw, 58px);
+}
+
+.logo-hero-card:before {
+  border-color: rgba(143, 75, 91, 0.22);
+}
+
+.logo-hero-card img {
+  object-fit: contain;
+  filter: drop-shadow(0 18px 34px rgba(33, 23, 19, 0.16));
+}
+
