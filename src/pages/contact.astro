@@ -16,7 +16,7 @@ import { socials } from '../data/social';
   <section>
     <div class="section-title">
       <h2>How would you like to connect?</h2>
-      <p class="lead">Choose the lane that fits what you need. Both options open a ready-to-send email.</p>
+      <p class="lead">Send a direct message or join the guest list for future updates.</p>
     </div>
     <div class="grid two contact-options">
       <div class="card contact-card">
@@ -26,10 +26,15 @@ import { socials } from '../data/social';
         <a class="btn" href={`mailto:${site.email}?subject=General%20question%20for%20A%20Sheila%20Bruce%20Affair`}>Send a Message</a>
       </div>
       <div class="card contact-card featured-contact-card">
-        <span class="pill">Private affair</span>
-        <h2>Have Sheila Host an Event</h2>
-        <p>For private gatherings, dinners, cocktail moments, boat parties, birthdays, professional circles, and community affairs.</p>
-        <a class="btn" href={`mailto:${site.email}?subject=Private%20event%20inquiry%20for%20A%20Sheila%20Bruce%20Affair`}>Inquire About an Event</a>
+        <span class="pill">Guest list</span>
+        <h2>Keep in Touch</h2>
+        <p>Be the first to hear about future affairs, elegant gatherings, and Fabulous moments from A Sheila Bruce Affair.</p>
+        <form class="form compact-form" data-email-list-form>
+          <input name="name" type="text" autocomplete="name" placeholder="Your name" required>
+          <input name="email" type="email" autocomplete="email" placeholder="Your email" required>
+          <button class="btn" type="submit">Join the List</button>
+          <p class="small-note" data-subscribe-status aria-live="polite">Your information is saved to Sheila’s private guest-list sheet.</p>
+        </form>
       </div>
     </div>
   </section>

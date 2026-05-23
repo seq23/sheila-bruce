@@ -7,6 +7,7 @@ const { ev } = Astro.props;
 const albums=readJsonDir('src/content/gallery'); const album=albums.find(a=>a.slug===ev.galleryAlbumSlug);
 const heroClass = String(ev.featuredImage).includes('/flyers/') ? 'hero-card contain-media' : 'hero-card';
 const mediaClass = (m) => `album-card ${m.type==='video'?'video-card':''} ${String(m.src).includes('/flyers/')?'flyer':''}`;
+const showRegistration = ev.status === 'upcoming' && ev.registrationType && ev.registrationType !== 'none' && ev.registrationUrl;
 ---
 <BaseLayout title={`${ev.title} | A Sheila Bruce Affair`} description={ev.summary} schema={[eventSchema(ev),breadcrumbSchema([{name:'Home',url:'/'},{name:'Events',url:'/events'},{name:ev.title,url:`/events/${ev.slug}`}])]}>
   <section class="hero event-detail-hero">
@@ -24,6 +25,7 @@ const mediaClass = (m) => `album-card ${m.type==='video'?'video-card':''} ${Stri
       <div class="card"><h2>Details</h2><p><b>Date:</b> {ev.displayDate}</p><p><b>Time:</b> {ev.startTime} {ev.endTime&&`– ${ev.endTime}`}</p><p><b>Location:</b> {ev.location}</p><p><b>Category:</b> {ev.category}</p><p><b>Attire:</b> {ev.attire}</p><p><b>Ticket note:</b> {ev.ticketInfo||'Archive event.'}</p></div>
       <div class="card"><h2>About this affair</h2><p>{ev.description}</p>{ev.panelists?.length>0&&<><h3>Panelists</h3><ul>{ev.panelists.map(p=><li>{p}</li>)}</ul></>}{ev.speakers?.length>0&&<><h3>Speakers</h3><ul>{ev.speakers.map(p=><li>{p}</li>)}</ul></>}</div>
     </div>
+    {showRegistration&&<div class="card registration-card"><h2>Register for this affair</h2><p>Use the button or scan the QR code to complete registration.</p><a class="btn" href={ev.registrationUrl} target="_blank" rel="noopener">{ev.registrationLabel||'Register Now'}</a>{ev.registrationQrSrc&&<div class="registration-qr"><img src={ev.registrationQrSrc} alt={`Registration QR code for ${ev.title}`}><p class="small-note">Scan to register.</p></div>}</div>}
   </section>
   {album&&<section class="dark"><div class="section-title"><h2>Gallery moments</h2><a class="btn" href="/gallery">Open Gallery</a></div><div class="album-grid">{album.media.filter(m=>m.published!==false).slice(0,6).map(m=><article class={mediaClass(m)}>{m.type==='video'?<video controls playsinline preload="metadata" poster={m.poster}><source src={m.src} type="video/mp4" /></video>:<img src={m.src} alt={m.alt||m.caption}/>}<div class="overlay"><h3>{m.caption||album.title}</h3></div></article>)}</div></section>}
 </BaseLayout>

@@ -18,6 +18,11 @@ if(scriptName.includes('validate-events')) {
   for(const e of events){
     if(e.status!=='past' && e.slug!=='e2e-test') fail(`Seeded event must be past: ${e.slug}`);
     if(e.registrationType && e.registrationType!=='none') fail(`Seeded archive event must not show registration CTA: ${e.slug}`);
+    if(e.registrationQrSrc){
+      if(!String(e.registrationQrSrc).startsWith('/assets/registration-qr/')) fail(`Event ${e.slug} has invalid registrationQrSrc path.`);
+      if(!/\.(png|jpg|jpeg|webp)$/i.test(String(e.registrationQrSrc))) fail(`Event ${e.slug} has invalid QR extension.`);
+      if(!publicAsset(e.registrationQrSrc)) fail(`Event ${e.slug} references missing registration QR asset.`);
+    }
     ['title','slug','category','summary','featuredImage'].forEach(k=>{ if(!String(e[k]||'').trim()) fail(`Event ${e.slug||'(missing slug)'} missing ${k}`); });
   }
   const eventsPage=text('src/pages/events.astro');
@@ -35,8 +40,10 @@ if(scriptName.includes('validate-admin')) {
   const adminPage=text('src/pages/admin.astro');
   if(adminPage.includes('slug/id') || adminPage.includes('Event, album, or video slug')) fail('Admin still exposes confusing slug/id copy.');
   if(!adminPage.includes('data-feature-choice')) fail('Admin homepage feature selector must be human-readable dropdown.');
+  if(!adminPage.includes('Registration QR Code')) fail('Admin event form missing Registration QR Code upload.');
   const adminJs=text('src/scripts/site.js');
   ['/api/create-event','/api/create-gallery-album','/api/create-insight','/api/list-admin-content','/api/unpublish-content','/api/republish-content','/api/delete-content','/api/set-homepage-feature'].forEach(api=>{ if(!adminJs.includes(api)) fail(`Admin UI does not call ${api}`); });
+  if(!adminJs.includes('/api/subscribe')) fail('Contact mailing list UI does not call /api/subscribe.');
 }
 if(scriptName.includes('validate-secrets')) { const bad=['ghp_','github_pat_','GITHUB_CONTENT_TOKEN=gh','sk-']; const files=fs.readdirSync(root,{recursive:true}).filter(f=>!String(f).includes('node_modules')&&!String(f).includes('dist')&&!String(f).includes('.git')); for(const f of files){const p=path.join(root,f); if(fs.statSync(p).isFile()){const s=fs.readFileSync(p,'utf8'); if(bad.some(b=>s.includes(b))) fail(`Possible secret in ${f}`)}} }
 if(scriptName.includes('validate-assets')) {

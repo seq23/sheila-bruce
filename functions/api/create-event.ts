@@ -9,6 +9,16 @@ export async function onRequestPost({ request, env }: any) {
     const slug = slugify(body.slug || body.title);
     let featuredImage = body.featuredImage || '/assets/logos/sheila-logo.png';
     const media = Array.isArray(body.media) ? body.media : [];
+    let registrationQrSrc = '';
+    if (body.registrationQr?.base64 && body.registrationQr?.filename) {
+      const qrName = String(body.registrationQr.filename);
+      const ext = (qrName.split('.').pop() || 'png').toLowerCase();
+      const allowed = ['png', 'jpg', 'jpeg', 'webp'];
+      if (!allowed.includes(ext)) return json({ ok: false, error: 'INVALID_QR_FILE', message: 'Registration QR Code must be PNG, JPG, JPEG, or WEBP.' }, 400);
+      if (String(body.registrationQr.base64).length > 1400000) return json({ ok: false, error: 'QR_FILE_TOO_LARGE', message: 'Registration QR Code must be under 1 MB.' }, 400);
+      registrationQrSrc = `/assets/registration-qr/${slug}-qr.${ext}`;
+      await putBase64File(env, `public${registrationQrSrc}`, body.registrationQr.base64, `Add registration QR for event: ${body.title}`);
+    }
     for (let index = 0; index < media.length; index++) {
       const item = media[index];
       if (!item?.base64 || !item?.filename) continue;
@@ -47,6 +57,7 @@ export async function onRequestPost({ request, env }: any) {
       galleryAlbumSlug: body.galleryAlbumSlug || '',
       registrationType: body.registrationType || 'none',
       registrationUrl: body.registrationUrl || '',
+      registrationQrSrc,
       registrationLabel: body.registrationLabel || 'Register Now',
       registrationNote: body.registrationNote || '',
       registrationClosesAt: body.registrationClosesAt || '',

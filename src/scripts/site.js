@@ -13,10 +13,32 @@ function localKey(type){return type==='event'?'asba_events':type==='album'?'asba
 function labelForType(type){return type==='event'?'Event':type==='album'?'Album':type==='video'?'Video':'Post'}
 function addFeatureOption(item){const type=item.type==='post'?'post':item.type; if(type==='post') return; const group=type==='event'?qs('[data-feature-events]'):type==='album'?qs('[data-feature-albums]'):qs('[data-feature-videos]'); if(!group || !item.slug) return; const value=`${type}:${item.slug}`; if(qs(`option[value="${value}"]`,group)) return; const opt=document.createElement('option'); opt.value=value; opt.textContent=`${labelForType(type)} — ${item.title||item.slug}`; group.appendChild(opt);}
 function refreshFeatureOptions(){localAll().forEach(addFeatureOption)}
+if(qs('[data-email-list-form]')){
+  qs('[data-email-list-form]').addEventListener('submit',async e=>{
+    e.preventDefault();
+    const form=e.currentTarget;
+    const status=qs('[data-subscribe-status]',form);
+    const button=qs('button[type=submit]',form);
+    const payload=Object.fromEntries(new FormData(form));
+    if(status) status.textContent='Saving your guest-list signup...';
+    if(button) button.disabled=true;
+    try{
+      const res=await fetch('/api/subscribe',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});
+      const data=await res.json().catch(()=>({ok:false,message:'Signup failed.'}));
+      if(!res.ok||data.ok===false) throw new Error(data.message||'Signup failed.');
+      form.reset();
+      if(status) status.textContent=data.message||'You’re on the list. Fabulous things are coming.';
+    }catch(err){
+      if(status) status.textContent='We could not save your signup right now. Please email asheilabruceaffair@gmail.com.';
+    }finally{
+      if(button) button.disabled=false;
+    }
+  });
+}
 if(qs('[data-admin]')){
   qsa('.admin-tabs button').forEach(b=>b.addEventListener('click',()=>{qsa('.admin-panel').forEach(p=>p.classList.remove('active')); qs(b.dataset.target)?.classList.add('active'); if(b.dataset.target==='#feature') refreshFeatureOptions();}));
   qs('[data-login-form]')?.addEventListener('submit',async e=>{e.preventDefault(); const p=String(new FormData(e.currentTarget).get('password')||''); try{await apiPost('/api/admin-auth',{password:p},p); localStorage.setItem('asba_admin_password',p); qs('[data-login]').hidden=true;qs('[data-dashboard]').hidden=false;adminStatus('Admin unlocked. Production endpoint accepted the password.'); refreshFeatureOptions();}catch(err){if(p==='blackgirlmagic'){localStorage.setItem('asba_admin_password',p);qs('[data-login]').hidden=true;qs('[data-dashboard]').hidden=false;adminStatus('Admin unlocked. Local preview mode is active.'); refreshFeatureOptions();}else adminStatus('Wrong password.')}});
-  qs('[data-create-event]')?.addEventListener('submit',async e=>{e.preventDefault(); const form=e.currentTarget; const f=Object.fromEntries(new FormData(form)); const media=await filePayloads(qs('[name="media"]',form)); const item={...f,slug:slugify(f.title),published:true,type:'event',featuredImage:'/assets/logos/sheila-logo.png',summary:f.summary||'New affair added.',registrationType:f.registrationType||'none',media}; try{const out=await apiPost('/api/create-event',item); adminStatus(`Published event through GitHub: ${out.slug}`);}catch(err){localAdd('asba_events',item); adminStatus(`Local preview saved event: ${item.title}. Production note: ${err.message}`);} addFeatureOption(item); renderManage();});
+  qs('[data-create-event]')?.addEventListener('submit',async e=>{e.preventDefault(); const form=e.currentTarget; const f=Object.fromEntries(new FormData(form)); const media=await filePayloads(qs('[name="media"]',form)); const qr=await filePayloads(qs('[name="registrationQr"]',form)); const item={...f,slug:slugify(f.title),published:true,type:'event',featuredImage:'/assets/logos/sheila-logo.png',summary:f.summary||'New affair added.',registrationType:f.registrationType||'none',registrationQr:qr[0],media}; try{const out=await apiPost('/api/create-event',item); adminStatus(`Published event through GitHub: ${out.slug}`);}catch(err){localAdd('asba_events',item); adminStatus(`Local preview saved event: ${item.title}. Production note: ${err.message}`);} addFeatureOption(item); renderManage();});
   qs('[data-create-album]')?.addEventListener('submit',async e=>{e.preventDefault(); const form=e.currentTarget; const f=Object.fromEntries(new FormData(form)); const media=await filePayloads(qs('[name="media"]',form)); media.forEach(m=>m.caption=f.caption||''); const item={...f,slug:slugify(f.title),published:true,type:'album',coverImage:'/assets/brand/sheila/sheila-champagne-closeup.jpeg',media:media.length?media:[{id:'local-photo',type:'image',src:'/assets/brand/sheila/sheila-champagne-closeup.jpeg',alt:f.title,caption:f.caption||'',published:true,sortOrder:1}]}; try{const out=await apiPost('/api/create-gallery-album',item); adminStatus(`Published album through GitHub: ${out.slug}`);}catch(err){localAdd('asba_albums',item); adminStatus(`Local preview saved album: ${item.title}. Production note: ${err.message}`);} addFeatureOption(item); renderManage();});
   qs('[data-create-post]')?.addEventListener('submit',async e=>{e.preventDefault(); const form=e.currentTarget; const f=Object.fromEntries(new FormData(form)); const images=await filePayloads(qs('[name="featuredImageFile"]',form)); const item={...f,slug:slugify(f.title),published:true,type:'post',featuredImageFile:images[0]}; try{const out=await apiPost('/api/create-insight',item); adminStatus(`Published Inspiration post through GitHub: ${out.slug}`);}catch(err){localAdd('asba_posts',item); adminStatus(`Local preview saved post: ${item.title}. Production note: ${err.message}`);} renderManage();});
   qs('[data-feature-form]')?.addEventListener('submit',async e=>{e.preventDefault(); const f=Object.fromEntries(new FormData(e.currentTarget)); const [type,slug]=(String(f.featureChoice||'').split(':')); if(!type||!slug){adminStatus('Choose a featured homepage item first.'); return;} localStorage.setItem('asba_feature_slug',slug); localStorage.setItem('asba_feature_type',type); const payload={slug,type,homepageMode:type==='album'?'featured_album':type==='video'?'featured_video':'featured_event'}; if(type==='event') payload.featuredEventSlug=slug; if(type==='album') payload.featuredAlbumSlug=slug; if(type==='video') payload.featuredVideoId=slug; try{await apiPost('/api/set-homepage-feature',payload); adminStatus('Homepage feature committed through GitHub.');}catch(err){adminStatus(`Homepage feature saved in local preview mode: ${labelForType(type)} — ${slug}. Production note: ${err.message}`);}});

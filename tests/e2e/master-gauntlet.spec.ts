@@ -36,10 +36,14 @@ test('gallery gauntlet: gallery has clear hybrid V1 sections', async ({ page }) 
   await expect(page.getByRole('heading', { name: 'Video Moments' })).toBeVisible();
   await expect(page.locator('video').first()).toBeVisible();
 });
-test('contact gauntlet: contact uses mailto CTAs without redundant inquiry form', async ({ page }) => {
+test('contact gauntlet: contact uses mailto plus guest-list capture', async ({ page }) => {
   await page.goto('/contact');
   await expect(page.getByRole('link', { name: 'Send a Message' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Inquire About an Event' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Keep in Touch' })).toBeVisible();
+  await expect(page.locator('[data-email-list-form] input[name=name]')).toBeVisible();
+  await expect(page.locator('[data-email-list-form] input[name=email]')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Join the List' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Inquire About an Event' })).toHaveCount(0);
   await expect(page.locator('[data-contact-form]')).toHaveCount(0);
   await expect(page.getByRole('heading', { name: 'Inquiry form' })).toHaveCount(0);
 });
@@ -50,6 +54,8 @@ test('transaction gauntlet: local admin create/unpublish/republish/delete journe
   await expect(page.getByText(/Admin unlocked/)).toBeVisible();
   await page.locator('[data-create-event] input[name=title]').fill('E2E Fabulous Test Affair');
   await page.locator('[data-create-event] textarea[name=summary]').fill('A local test event for the Master Gauntlet.');
+  await expect(page.locator('[data-create-event] input[name=registrationQr]')).toBeVisible();
+  await expect(page.getByText('Registration QR Code')).toBeVisible();
   await page.locator('[data-create-event] button[type=submit]').click();
   await expect(page.getByText(/Local preview saved event|Published event through GitHub/)).toBeVisible();
   await page.getByRole('button',{name:'Homepage Feature'}).click();
