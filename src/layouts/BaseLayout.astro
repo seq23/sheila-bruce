@@ -2,6 +2,7 @@
 import site from '../data/site.json';
 import { socials } from '../data/social';
 import { organizationSchema } from '../lib/schema';
+import '../styles/global.css';
 const { title = site.brandName, description = site.descriptor, schema = [] } = Astro.props;
 const allSchema = [organizationSchema(), ...(Array.isArray(schema)?schema:[schema])];
 const nav = [
@@ -24,7 +25,6 @@ const nav = [
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/src/styles/global.css">
   </head>
   <body>
     <header class="site-header">
@@ -64,6 +64,8 @@ const nav = [
       </div>
       <p class="legal">© 2026 A Sheila Bruce Affair, LLC. All rights reserved.</p>
     </footer>
-    <script src="/src/scripts/site.js" type="module"></script>
+    <script>
+      import '../scripts/site.js';
+    </script>
   </body>
 </html>
