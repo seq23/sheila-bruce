@@ -4,9 +4,13 @@ import site from '../data/site.json';
 import feature from '../data/homepage-feature.json';
 import { readJsonDir, isPublished, sortEvents } from '../lib/content';
 const events=sortEvents(readJsonDir('src/content/events').filter(isPublished));
-const past=events.filter(e=>e.status==='past');
-const upcoming=events.filter(e=>e.status==='upcoming');
-const featured=events.find(e=>e.slug===feature.featuredEventSlug)||past[0];
+const today = new Date().toISOString().slice(0, 10);
+const past=events.filter(e=>e.status==='past').sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+const upcoming=events.filter(e=>e.status==='upcoming').sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+const nextUpcoming=upcoming.find(e=>(e.date||'')>=today)||upcoming[0];
+const latestPast=past[0];
+const manualFeatured=feature.homepageMode && feature.homepageMode!=='auto' ? events.find(e=>e.slug===feature.featuredEventSlug) : null;
+const featured=manualFeatured||nextUpcoming||latestPast;
 const albums=readJsonDir('src/content/gallery').filter(isPublished);
 const featuredAlbum=albums.find(a=>a.slug===feature.featuredAlbumSlug)||albums[0];
 ---

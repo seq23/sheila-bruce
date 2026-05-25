@@ -1,6 +1,6 @@
 {
-  "featuredEventSlug": "tuxedo-ball",
-  "featuredAlbumSlug": "fabulous-moments",
+  "featuredEventSlug": "",
+  "featuredAlbumSlug": "",
   "featuredVideoId": "video-1",
-  "homepageMode": "featured_event"
+  "homepageMode": "auto"
 }
