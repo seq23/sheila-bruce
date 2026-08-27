@@ -1,0 +1,10 @@
+# This project is published only on a bare Cloudflare Pages preview host
+# (sheila-bruce.pages.dev) with no custom domain attached. A preview host must
+# not compete for indexing with a future production domain, so crawling is
+# disallowed outright and no sitemap is advertised.
+#
+# When a custom domain is attached, replace this file with the portfolio's
+# standard citation-first policy (explicit per-agent Allow groups plus a
+# Sitemap directive).
+User-agent: *
+Disallow: /
