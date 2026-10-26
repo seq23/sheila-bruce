@@ -1,0 +1,31 @@
+# Playwright e2e: nightly on main and on demand, never per merge (the merge gate is validate.yml).
+# The suite runs in about 30 s plus ~2 min of setup; timeout-minutes is a hang detector at ~4x.
+name: e2e
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 7 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: test-results/
+          retention-days: 7

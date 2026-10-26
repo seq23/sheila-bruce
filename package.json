@@ -26,7 +26,8 @@
     "review": "astro dev",
     "review:built": "npm run build && astro preview",
     "test:gauntlet:headed": "playwright test tests/e2e/master-gauntlet.spec.ts --headed",
-    "test:ui": "playwright test --ui"
+    "test:ui": "playwright test --ui",
+    "test": "node --test tests/unit/*.test.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
