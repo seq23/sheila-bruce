@@ -1,0 +1,43 @@
+# Merge gate: install, build, every validator, the guard tests. Target well under 5 minutes.
+# Validation only — Cloudflare Pages deploys from its own git integration, so this workflow holds
+# no production credential. tests/unit/ci-workflow.test.mjs fails if a validator is not run here.
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+      - run: npm run validate:site-url
+      - run: npm run validate:content
+      - run: npm run validate:routes
+      - run: npm run validate:links
+      - run: npm run validate:events
+      - run: npm run validate:published
+      - run: npm run validate:admin
+      - run: npm run validate:schema
+      - run: npm run validate:media
+      - run: npm run validate:secrets
+      - run: npm run validate:assets
+      - run: npm run validate:social
+      - run: npm test
