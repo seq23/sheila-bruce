@@ -1,3 +1,3 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-export default defineConfig({ site: 'https://a-sheila-bruce-affair.pages.dev', integrations: [sitemap()] });
+export default defineConfig({ site: 'https://sheila-bruce.pages.dev', integrations: [sitemap()] });
