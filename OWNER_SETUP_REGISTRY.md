@@ -3,7 +3,7 @@
 Repo: `sheila-bruce`
 Target branch: `main`
 Admin URL: `/admin`
-Admin password: `blackgirlmagic`
+Admin password: set as the `ADMIN_PASSWORD` Cloudflare Pages secret (never written here)
 Canonical email: `asheilabruceaffair@gmail.com`
 Text RSVP / event inquiries: `215-262-6942`
 
@@ -13,7 +13,7 @@ Text RSVP / event inquiries: `215-262-6942`
 - TikTok: https://www.tiktok.com/@fabul11
 
 ## Cloudflare env vars to paste
-- `ADMIN_PASSWORD=blackgirlmagic`
+- `ADMIN_PASSWORD` (secret), `ADMIN_SESSION_SECRET` (secret), `ADMIN_LOCKOUT` (KV binding)
 - `GITHUB_CONTENT_TOKEN=<paste your GitHub token>`
 - `GITHUB_REPO_OWNER=<your GitHub owner>`
 - `GITHUB_REPO_NAME=sheila-bruce`

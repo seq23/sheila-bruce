@@ -1,10 +1,6 @@
-import { json, readBody } from '../_shared/github';
+import { signIn } from '../_shared/admin-session.ts';
 
+// Signs the admin in: checks the password (constant time, per-IP lockout) and sets a signed session cookie.
 export async function onRequestPost({ request, env }: any) {
-  const body = await readBody(request);
-  const expected = env.ADMIN_PASSWORD || 'blackgirlmagic';
-  if (body.password !== expected) return json({ ok: false, error: 'INVALID_PASSWORD', message: 'Wrong password.' }, 401);
-  return json({ ok: true, message: 'Admin unlocked.' }, 200, {
-    'set-cookie': `asba_admin=${encodeURIComponent(expected)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=43200`
-  });
+  return signIn(request, env);
 }

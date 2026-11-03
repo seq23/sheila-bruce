@@ -1,7 +1,7 @@
 import { json, readBody, requireAdmin, contentPath, getFile, putTextFile, setMarkdownPublished } from '../_shared/github';
 
 export async function onRequestPost({ request, env }: any) {
-  const denied = requireAdmin(request, env); if (denied) return denied;
+  const denied = await requireAdmin(request, env); if (denied) return denied;
   try {
     const body = await readBody(request); const path = contentPath(body.type, body.slug);
     const file = await getFile(env, path); if (!file?.content) return json({ ok: false, error: 'CONTENT_NOT_FOUND' }, 404);

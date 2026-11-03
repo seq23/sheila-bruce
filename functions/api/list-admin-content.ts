@@ -8,7 +8,7 @@ async function listDir(env: any, dir: string, type: string) {
 }
 
 export async function onRequestGet({ request, env }: any) {
-  const denied = requireAdmin(request, env); if (denied) return denied;
+  const denied = await requireAdmin(request, env); if (denied) return denied;
   try {
     const items = [
       ...(await listDir(env, 'src/content/events', 'event')),

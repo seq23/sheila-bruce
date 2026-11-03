@@ -15,5 +15,5 @@ NODE_OPTIONS="--max-old-space-size=3072" npm run validate:all
 ```
 
 ## Admin
-Local admin is at `/admin`. Password: `blackgirlmagic`.
+Admin is at `/admin`. The password is the `ADMIN_PASSWORD` Pages secret (never in this repo). On localhost, `/admin` opens a local preview with any password.
 Local mode uses browser storage for testing. Production mode uses Cloudflare env vars and GitHub commit automation.

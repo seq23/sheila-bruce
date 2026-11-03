@@ -1,7 +1,7 @@
 import { json, readBody, requireAdmin, putTextFile } from '../_shared/github';
 
 export async function onRequestPost({ request, env }: any) {
-  const denied = requireAdmin(request, env); if (denied) return denied;
+  const denied = await requireAdmin(request, env); if (denied) return denied;
   try {
     const body = await readBody(request);
     const config = {

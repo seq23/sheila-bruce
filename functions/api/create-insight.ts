@@ -1,7 +1,7 @@
 import { json, readBody, requireAdmin, slugify, putBase64File, putTextFile, markdownPost } from '../_shared/github';
 
 export async function onRequestPost({ request, env }: any) {
-  const denied = requireAdmin(request, env); if (denied) return denied;
+  const denied = await requireAdmin(request, env); if (denied) return denied;
   try {
     const body = await readBody(request);
     if (!body.title || !body.summary || !body.body) return json({ ok: false, error: 'MISSING_REQUIRED_FIELDS', message: 'Title, summary, and body are required.' }, 400);

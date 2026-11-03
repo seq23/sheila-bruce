@@ -49,7 +49,7 @@ test('contact gauntlet: contact uses mailto plus guest-list capture', async ({ p
 });
 test('transaction gauntlet: local admin create/unpublish/republish/delete journey', async ({ page }) => {
   await page.goto('/admin');
-  await page.locator('input[name=password]').fill('blackgirlmagic');
+  await page.locator('input[name=password]').fill('local-preview-only');
   await page.getByRole('button',{name:'Enter Admin'}).click();
   await expect(page.getByText(/Admin unlocked/)).toBeVisible();
   await page.locator('[data-create-event] input[name=title]').fill('E2E Fabulous Test Affair');
