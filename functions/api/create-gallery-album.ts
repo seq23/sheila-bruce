@@ -1,7 +1,7 @@
 import { json, readBody, requireAdmin, slugify, putTextFile, putBase64File } from '../_shared/github';
 
 export async function onRequestPost({ request, env }: any) {
-  const denied = requireAdmin(request, env); if (denied) return denied;
+  const denied = await requireAdmin(request, env); if (denied) return denied;
   try {
     const body = await readBody(request);
     if (!body.title) return json({ ok: false, error: 'MISSING_TITLE', message: 'Album title is required.' }, 400);

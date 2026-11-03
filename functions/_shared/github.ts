@@ -1,5 +1,8 @@
+import { requireAdminSession } from './admin-session.ts';
 type Env = {
   ADMIN_PASSWORD?: string;
+  ADMIN_SESSION_SECRET?: string;
+  ADMIN_LOCKOUT?: unknown;
   GITHUB_CONTENT_TOKEN?: string;
   GITHUB_REPO_OWNER?: string;
   GITHUB_REPO_NAME?: string;
@@ -21,13 +24,9 @@ export function slugify(value: string) {
     .replace(/^-|-$/g, '') || 'item';
 }
 
+// Admin check lives in admin-session.ts (signed session cookie, no password fallback, fails closed).
 export function requireAdmin(request: Request, env: Env) {
-  const expected = env.ADMIN_PASSWORD || 'blackgirlmagic';
-  const cookie = request.headers.get('cookie') || '';
-  const header = request.headers.get('x-asba-admin-password') || '';
-  const hasCookie = cookie.split(';').some(part => part.trim() === `asba_admin=${encodeURIComponent(expected)}`);
-  if (header === expected || hasCookie) return null;
-  return json({ ok: false, error: 'ADMIN_REQUIRED', message: 'Admin password/session required.' }, 401);
+  return requireAdminSession(request, env as any);
 }
 
 export async function readBody(request: Request) {
