@@ -13,7 +13,8 @@ permissions:
 
 jobs:
   e2e:
-    runs-on: ubuntu-latest
+    # Pinned: ubuntu-latest became 26.04 on 5 Nov 2026, which Playwright's browser install refuses.
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4

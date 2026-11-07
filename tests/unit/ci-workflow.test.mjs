@@ -56,4 +56,10 @@ test('e2e runs nightly and on demand only, with a job timeout', () => {
   assert.match(y, /^\s+timeout-minutes:\s*\d+/m);
   assert.match(y, /npm run test:e2e/);
   assert.doesNotMatch(y, /secrets\./);
+  // 5 Nov 2026: ubuntu-latest became 26.04 and `playwright install` refused it ("Playwright does not
+  // support chromium on ubuntu26.04-x64"): red two nights on no commit. The image is pinned to one
+  // Playwright supports; move it only after Playwright does.
+  const images = [...y.matchAll(/^\s+runs-on:\s*(\S+)\s*$/gm)].map((m) => m[1]);
+  assert.ok(images.length > 0, 'e2e.yml has no runs-on');
+  for (const image of images) assert.ok(['ubuntu-24.04', 'ubuntu-22.04'].includes(image), `e2e.yml runs on ${image}; pin a Playwright-supported image (ubuntu-24.04), never ubuntu-latest`);
 });
