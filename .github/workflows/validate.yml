@@ -30,6 +30,7 @@ jobs:
       - run: npm run build
       - run: npm run validate:links
       - run: npm run validate:admin
+      - run: npm run validate:media
       - run: npm run validate:secrets
       - run: npm run validate:assets
       - run: npm test

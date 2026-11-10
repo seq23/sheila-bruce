@@ -9,6 +9,7 @@ CI: `.github/workflows/validate.yml` runs build, every `validate:*` script and `
 | Build | `npm run build` | HARD FAIL | Astro compiles and public routes generate | Cloudflare env correctness or deployed Functions |
 | Links | `npm run validate:links` | HARD FAIL | Every root-relative href/src/poster in the built `dist/` resolves to a built page, public file or Function (run after build) | Every external URL stays live forever |
 | Admin contract | `npm run validate:admin` | HARD FAIL | Required admin endpoints/helpers exist, are not scaffold placeholders, and admin UI calls production endpoints | Token permissions or Cloudflare deployed runtime behavior |
+| Media | `npm run validate:media` | HARD FAIL | Video/media contract exists and seeded videos are MP4 | Streaming/CDN performance |
 | Secrets scan | `npm run validate:secrets` | HARD FAIL | No obvious accidental GitHub/OpenAI secret pattern | Cloudflare values are set correctly |
 | Assets | `npm run validate:assets` | HARD FAIL | Key client assets exist | Final visual preference approval |
 | CI wiring guard | `npm test` | HARD FAIL | validate.yml exists and runs every scripts/validate-*.mjs; validators fail on empty input; e2e specs are self-contained | That CI actually ran (check `gh run list`) |
