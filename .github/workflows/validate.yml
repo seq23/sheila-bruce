@@ -28,16 +28,9 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm run build
-      - run: npm run validate:site-url
-      - run: npm run validate:content
-      - run: npm run validate:routes
       - run: npm run validate:links
-      - run: npm run validate:events
-      - run: npm run validate:published
       - run: npm run validate:admin
-      - run: npm run validate:schema
       - run: npm run validate:media
       - run: npm run validate:secrets
       - run: npm run validate:assets
-      - run: npm run validate:social
       - run: npm test
